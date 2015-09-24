@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./web"
+	"github.com/zakuro9715/AOJRESTAPI/web"
 )
 
 func main() {

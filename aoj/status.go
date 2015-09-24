@@ -1,7 +1,7 @@
 package aoj
 
 type Status struct {
-  Submission   int `xml:"submission"`
+	Submission   int `xml:"submission"`
 	Solved       int `xml:"solved"`
 	Accepted     int `xml:"accepted"`
 	WrongAnswer  int `xml:"wronganswer"`

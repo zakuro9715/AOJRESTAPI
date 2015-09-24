@@ -1,8 +1,8 @@
 package aoj
 
 import (
-	"../util/http"
 	"encoding/xml"
+	"github.com/zakuro9715/AOJRESTAPI/util/http"
 	"net/url"
 )
 

@@ -8,9 +8,9 @@ import (
 )
 
 const (
-	logFormat = "%v[%v] %v"
-  UsersPath = "/users/"
-  ProblemsPath = "/problems/"
+	logFormat    = "%v[%v] %v"
+	UsersPath    = "/users/"
+	ProblemsPath = "/problems/"
 )
 
 func Log(handler http.Handler) http.Handler {

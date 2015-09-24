@@ -1,7 +1,7 @@
 package api
 
 import (
-	"../aoj"
+	"github.com/zakuro9715/AOJRESTAPI/aoj"
 	"strconv"
 	"strings"
 )
@@ -29,14 +29,14 @@ func NewProblem(ap *aoj.Problem) *Problem {
 
 	// ProblemSearchApi returns value containing newlines like a <id>\n0000\n</id>
 
-  judgeNum, _ := strconv.Atoi(strings.Trim(ap.Available, "\n"))
-  timeLimit, _ := strconv.Atoi(strings.Trim(ap.ProblemTimeLimit, "\n"))
-  memoryLimit, _ := strconv.Atoi(strings.Trim(ap.ProblemMemoryLimit, "\n"))
+	judgeNum, _ := strconv.Atoi(strings.Trim(ap.Available, "\n"))
+	timeLimit, _ := strconv.Atoi(strings.Trim(ap.ProblemTimeLimit, "\n"))
+	memoryLimit, _ := strconv.Atoi(strings.Trim(ap.ProblemMemoryLimit, "\n"))
 
 	p.Id = strings.Trim(ap.Id, "\n")
 	p.Name = strings.Trim(ap.Name, "\n")
 	p.Judge = judge[judgeNum]
-  p.TimeLimit = timeLimit
+	p.TimeLimit = timeLimit
 	p.MemoryLimit = memoryLimit
 	return p
 }
