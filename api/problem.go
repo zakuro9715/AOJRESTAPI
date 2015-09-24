@@ -6,12 +6,16 @@ import (
 	"strings"
 )
 
-type Problem struct {
+type ProblemCore struct {
 	Id          string
 	Name        string
 	Judge       string
 	TimeLimit   int
 	MemoryLimit int
+}
+
+type Problem struct {
+	*ProblemCore
 }
 
 var (
@@ -24,21 +28,23 @@ var (
 	}
 )
 
-func NewProblem(ap *aoj.Problem) *Problem {
-	p := new(Problem)
-
+func NewProblemCore(ap *aoj.Problem) *ProblemCore {
 	// ProblemSearchApi returns value containing newlines like a <id>\n0000\n</id>
-
 	judgeNum, _ := strconv.Atoi(strings.Trim(ap.Available, "\n"))
 	timeLimit, _ := strconv.Atoi(strings.Trim(ap.ProblemTimeLimit, "\n"))
 	memoryLimit, _ := strconv.Atoi(strings.Trim(ap.ProblemMemoryLimit, "\n"))
 
-	p.Id = strings.Trim(ap.Id, "\n")
-	p.Name = strings.Trim(ap.Name, "\n")
-	p.Judge = judge[judgeNum]
-	p.TimeLimit = timeLimit
-	p.MemoryLimit = memoryLimit
-	return p
+	return &ProblemCore{
+		Id:          strings.Trim(ap.Id, "\n"),
+		Name:        strings.Trim(ap.Name, "\n"),
+		Judge:       judge[judgeNum],
+		TimeLimit:   timeLimit,
+		MemoryLimit: memoryLimit,
+	}
+}
+
+func NewProblem(ap *aoj.Problem) *Problem {
+	return &Problem{NewProblemCore(ap)}
 }
 
 func FetchProblem(id string) (*Problem, error) {
