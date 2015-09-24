@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type User struct {
+type UserCore struct {
 	Id              string
 	Name            string
 	Affliation      string
@@ -14,16 +14,24 @@ type User struct {
 	LastSubmittedAt time.Time
 }
 
-func NewUser(au *aoj.User) *User {
+type User struct {
+	*UserCore
+}
+
+func NewUserCore(au *aoj.User) *UserCore {
 	registerD := time.Duration(au.RegisterDate) * time.Millisecond
 	submitD := time.Duration(au.LastSubmitDate) * time.Millisecond
-	u := new(User)
-	u.Id = au.Id
-	u.Name = au.Name
-	u.Affliation = au.Affliation
-	u.RegisteredAt = timeutil.FromUnixTime(&registerD, timeutil.JST)
-	u.LastSubmittedAt = timeutil.FromUnixTime(&submitD, timeutil.JST)
-	return u
+	return &UserCore{
+		Id:              au.Id,
+		Name:            au.Name,
+		Affliation:      au.Affliation,
+		RegisteredAt:    timeutil.FromUnixTime(&registerD, timeutil.JST),
+		LastSubmittedAt: timeutil.FromUnixTime(&submitD, timeutil.JST),
+	}
+}
+
+func NewUser(au *aoj.User) *User {
+	return &User{NewUserCore(au)}
 }
 
 func FetchUser(userId string) (*User, error) {
