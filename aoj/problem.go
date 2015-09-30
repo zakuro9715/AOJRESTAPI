@@ -10,9 +10,9 @@ import (
 type Problem struct {
 	Id                 string          `xml:"id"`
 	Name               string          `xml:"name"`
-	Available          string          `xml:"available"`
-	ProblemTimeLimit   string          `xml:"problemtimelimit"`
-	ProblemMemoryLimit string          `xml:"problemmemorylimit"`
+	Available          int             `xml:"available"`
+	ProblemTimeLimit   int             `xml:"problemtimelimit"`
+	ProblemMemoryLimit int             `xml:"problemmemorylimit"`
 	Status             Status          `xml:"status"`
 	SolvedList         []SolvedSummary `xml:"solved_list>user"`
 }

@@ -2,8 +2,6 @@ package api
 
 import (
 	"github.com/zakuro9715/AOJRESTAPI/aoj"
-	"strconv"
-	"strings"
 )
 
 type ProblemCore struct {
@@ -30,16 +28,13 @@ var (
 
 func NewProblemCore(ap *aoj.Problem) *ProblemCore {
 	// ProblemSearchApi returns value containing newlines like a <id>\n0000\n</id>
-	judgeNum, _ := strconv.Atoi(strings.Trim(ap.Available, "\n"))
-	timeLimit, _ := strconv.Atoi(strings.Trim(ap.ProblemTimeLimit, "\n"))
-	memoryLimit, _ := strconv.Atoi(strings.Trim(ap.ProblemMemoryLimit, "\n"))
 
 	return &ProblemCore{
-		Id:          strings.Trim(ap.Id, "\n"),
-		Name:        strings.Trim(ap.Name, "\n"),
-		Judge:       judge[judgeNum],
-		TimeLimit:   timeLimit,
-		MemoryLimit: memoryLimit,
+		Id:          ap.Id,
+		Name:        ap.Name,
+		Judge:       judge[ap.Available],
+		TimeLimit:   ap.ProblemTimeLimit,
+		MemoryLimit: ap.ProblemMemoryLimit,
 	}
 }
 
