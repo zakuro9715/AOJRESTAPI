@@ -8,13 +8,22 @@ import (
 )
 
 type Problem struct {
-	Id                 string          `xml:"id"`
-	Name               string          `xml:"name"`
-	Available          int             `xml:"available"`
-	ProblemTimeLimit   int             `xml:"problemtimelimit"`
-	ProblemMemoryLimit int             `xml:"problemmemorylimit"`
-	Status             Status          `xml:"status"`
-	SolvedList         []SolvedSummary `xml:"solved_list>user"`
+	Id                 string       `xml:"id"`
+	Name               string       `xml:"name"`
+	Available          int          `xml:"available"`
+	ProblemTimeLimit   int          `xml:"problemtimelimit"`
+	ProblemMemoryLimit int          `xml:"problemmemorylimit"`
+	Status             Status       `xml:"status"`
+	SolvedList         []SolvedUser `xml:"solved_list>user"`
+}
+
+type SolvedUser struct {
+	Id             string `xml:"id"`
+	SubmissionDate int64  `xml:"submissiondate"`
+	Language       string `xml:"language"`
+	CpuTime        int    `xml:"cuptime"`
+	Memory         int    `xml:"memory"`
+	CodeSize       int    `xml:"code_size"`
 }
 
 const (
