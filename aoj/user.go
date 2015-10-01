@@ -15,7 +15,7 @@ type User struct {
 	Name           string          `xml:"name"`
 	Affliation     string          `xml:"affliation"`
 	RegisterDate   int64           `xml:"registerdate"`
-	LastSubmitDate int64           `xml:"lastsubimtdate"`
+	LastSubmitDate int64           `xml:"lastsubmitdate"`
 	Status         Status          `xml:"status"`
 	SolvedList     []SolvedProblem `xml:"solved_list>problem"`
 }
