@@ -28,7 +28,8 @@ type SolvedUser struct {
 }
 
 const (
-	ProblemSearchUrl = "http://judge.u-aizu.ac.jp/onlinejudge/webservice/problem"
+	ProblemSearchUrl     = "http://judge.u-aizu.ac.jp/onlinejudge/webservice/problem"
+	ProblemListSearchUrl = "http://judge.u-aizu.ac.jp/onlinejudge/webservice/problem_list"
 )
 
 func (p *Problem) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
@@ -102,4 +103,17 @@ func ProblemSearchApi(id string, status bool) (*Problem, error) {
 	p := new(Problem)
 	err = xml.Unmarshal(data, p)
 	return p, err
+}
+
+func ProblemListSearchApi(volume int) ([]Problem, error) {
+	q := url.Values{"volume": {strconv.Itoa(volume)}}.Encode()
+	data, err := http.Get(ProblemListSearchUrl, q)
+	if err != nil {
+		return nil, err
+	}
+	pl := &struct {
+		Problems []Problem `xml:"problem"`
+	}{}
+	err = xml.Unmarshal(data, pl)
+	return pl.Problems, err
 }
