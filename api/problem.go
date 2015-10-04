@@ -48,3 +48,16 @@ func FetchProblem(id string) (*Problem, error) {
 	ap, err := aoj.ProblemSearchApi(id, false)
 	return NewProblem(ap), err
 }
+
+func FetchProblems(volume int) ([]ProblemCore, error) {
+	aojProblemList, err := aoj.ProblemListSearchApi(volume)
+	if err != nil {
+		return make([]ProblemCore, 0), err
+	}
+
+	problemList := make([]ProblemCore, len(aojProblemList))
+	for i, v := range aojProblemList {
+		problemList[i] = *NewProblemCore(&v)
+	}
+	return problemList, nil
+}
