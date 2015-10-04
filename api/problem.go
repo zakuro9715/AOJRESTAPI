@@ -7,13 +7,13 @@ import (
 type ProblemCore struct {
 	Id          string
 	Name        string
-	Judge       string
 	TimeLimit   int
 	MemoryLimit int
 }
 
 type Problem struct {
 	*ProblemCore
+	Judge string
 }
 
 var (
@@ -32,14 +32,16 @@ func NewProblemCore(ap *aoj.Problem) *ProblemCore {
 	return &ProblemCore{
 		Id:          ap.Id,
 		Name:        ap.Name,
-		Judge:       judge[ap.Available],
 		TimeLimit:   ap.ProblemTimeLimit,
 		MemoryLimit: ap.ProblemMemoryLimit,
 	}
 }
 
 func NewProblem(ap *aoj.Problem) *Problem {
-	return &Problem{NewProblemCore(ap)}
+	return &Problem{
+		ProblemCore: NewProblemCore(ap),
+		Judge:       judge[ap.Available],
+	}
 }
 
 func FetchProblem(id string) (*Problem, error) {
