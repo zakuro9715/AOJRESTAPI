@@ -1,3 +1,3 @@
 # [WIP] aojrestapi
 
-aojrestapi is user frendly api wrapper for AOJ.
+aojrestapi is user friendly api wrapper for AOJ.
